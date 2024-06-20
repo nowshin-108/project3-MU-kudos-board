@@ -24,13 +24,13 @@ model board {
 }
 
 model card {
-  board         board     @relation(fields: [board_id], references: [board_id])
+  board         board     @relation(fields: [board_id], references: [board_id], onDelete: Cascade)
   board_id      Int
   card_id       Int       @id @default(autoincrement())
   title         String
   message       String
   owner         String
-  gif           String
+  imgURL        String
   votes         Int       @default(0)
   create_time   DateTime  @default(now())
   update_time   DateTime  @updatedAt

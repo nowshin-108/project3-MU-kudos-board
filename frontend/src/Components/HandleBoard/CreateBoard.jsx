@@ -58,7 +58,7 @@ function CreateBoard({onBoardCreated}) {
                     Create a New Board
                 </button>
             {modal && (
-                <dialog className="overlay" onClick={toggleModal}>
+                <div className="overlay" onClick={toggleModal}>
                     <div className="modal_content" onClick={e => e.stopPropagation()} >
                         <div className="form_container">
                             <form onSubmit={handleSubmit}>
@@ -74,13 +74,18 @@ function CreateBoard({onBoardCreated}) {
                                 </div>
                                 <div>
                                     <label htmlFor="category">Category:</label>
-                                    <input
+                                    <select                                         
                                         type="text"
                                         id="category"
                                         value={category}
                                         onChange={(e) => setCategory(e.target.value)}
                                         required
-                                    />
+                                    
+                                    >
+                                        <option value="Celebration">Celebration</option>
+                                        <option value="Inspiration">Inspiration</option>
+                                        <option value="Thank You">Thank You</option>
+                                    </select>
                                 </div>
                                 <div>
                                     <label htmlFor="owner">Owner:</label>
@@ -96,7 +101,7 @@ function CreateBoard({onBoardCreated}) {
                             </form>
                         </div>
                     </div>
-                </dialog>
+                </div>
             )}
         </>
     );
@@ -108,3 +113,4 @@ CreateBoard.propTypes = {
 
 export default CreateBoard
 
+//after creating the board there the modal has to close.

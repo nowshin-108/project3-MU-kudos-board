@@ -115,7 +115,8 @@
 
 import { useState, useEffect } from 'react';
 import './Homepage.css'
-import CreateBoard from '../CeateBoard/CreateBoard';
+import CreateBoard from '../HandleBoard/CreateBoard';
+import DeleteBoard from '../HandleBoard/DeleteBoard';
 
 function Homepage() {
     const [boards, setBoards] = useState([]);
@@ -124,7 +125,7 @@ function Homepage() {
 
     const fetchBoards = async (category = 'all') => {
         try {
-            const url = (category === 'All') ? `http://localhost:3000/boards` : `http://localhost:3000/boards?category=${category}`;
+            const url = (category === 'All') ? `http://localhost:3000/boards?search=${searchQuery}` : `http://localhost:3000/boards?category=${category}`;
             console.log("Fetching boards from URL:", url); 
             const response = await fetch(url, {
                 method: 'GET',
@@ -139,21 +140,26 @@ function Homepage() {
         }
     };
 
-    useEffect(() => {
-        fetchBoards(selectedCategory);
-    }, [selectedCategory]);
+    // useEffect(() => {
+    //     fetchBoards(selectedCategory);
+    // }, [selectedCategory]);
 
     const handleCategoryChange = (category) => {
         setSelectedCategory(category);
     };
 
     const handleBoardCreated = () => {
-        fetchBoards(selectedCategory); // Refetch boards on new board creation
+        fetchBoards(selectedCategory);
     };
 
     useEffect(() => {
         fetchBoards(selectedCategory);
-    }, [selectedCategory]);  // Dependency array includes selectedCategory to refetch when it changes
+        // if (searchQuery.length > 0) {  // Optionally, you can add a condition to start searching after a certain number of characters
+        //     fetchBoards();
+        // } else {
+        //     setBoards([]);  // Clear boards when query is empty
+        // }
+    }, [selectedCategory, searchQuery]);  // Dependency array includes selectedCategory to refetch when it changes
 
     return (
             <div className='main-content'>
@@ -182,7 +188,7 @@ function Homepage() {
                         <h3>{board.title}</h3>
                         <p>{board.category}</p>
                         <button className="board-card-button">View</button>
-                        <button className="board-card-button">Delete</button>
+                        <DeleteBoard id={board.board_id} onBoardCreated={handleBoardCreated}/>
                     </div>
                 ))}
             </div>
