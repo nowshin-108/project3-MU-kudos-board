@@ -1,0 +1,22 @@
+header {
+  background: #ffb3ba;
+}
+
+h1 {
+  margin-top: 0;
+  padding: 1em;
+  text-align: center;
+  color: 	#fff6f6;
+}
+
+footer {
+  background: #ffb3ba;
+  margin-top: 20px;
+  padding: 1em;
+  text-align: center;
+  font-size: xx-large;
+}
+
+a, a:link, a:visited {
+  color: 	#fff6f6;
+}
