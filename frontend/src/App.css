@@ -10,6 +10,7 @@ h1 {
 }
 
 footer {
+  /* position: fixed; */
   background: #ffb3ba;
   margin-top: 20px;
   padding: 1em;

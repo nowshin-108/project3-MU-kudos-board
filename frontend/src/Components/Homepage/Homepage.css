@@ -1,6 +1,7 @@
 .main-content {
     padding: 30px;
     text-align: center;
+    min-height: 700px;
 }
 
 /* Search and Search button specific styles */

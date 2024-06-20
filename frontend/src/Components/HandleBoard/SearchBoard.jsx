@@ -1,6 +1,6 @@
 // import { useState } from 'react';
 // import PropTypes from 'prop-types';
-// import "./DeleteBoard.css";
+// import "./Board.css";
 
 // function DeleteBoard({ searchQuery }) {
 //     const handleSearch = async (searchQuery) => {

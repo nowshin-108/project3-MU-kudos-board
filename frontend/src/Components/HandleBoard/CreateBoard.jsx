@@ -4,7 +4,7 @@ import "./CreateBoard.css";
 
 function CreateBoard({onBoardCreated}) {
     const [title, setTitle] = useState('');
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState('Celebration');
     const [owner, setOwner] = useState('');
     const [modal, setModal] = useState(false);
     const toggleModal = () => {
@@ -81,7 +81,7 @@ function CreateBoard({onBoardCreated}) {
                                         onChange={(e) => setCategory(e.target.value)}
                                         required
                                     
-                                    >
+                                    >   
                                         <option value="Celebration">Celebration</option>
                                         <option value="Inspiration">Inspiration</option>
                                         <option value="Thank You">Thank You</option>
@@ -108,8 +108,8 @@ function CreateBoard({onBoardCreated}) {
 }
 
 CreateBoard.propTypes = {
-    onBoardCreated: PropTypes.func.isRequired, // Validate that onBoardCreated is a function and is required
-};
+    onBoardCreated: PropTypes.func.isRequired,
+}
 
 export default CreateBoard
 

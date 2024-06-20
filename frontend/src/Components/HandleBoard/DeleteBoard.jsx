@@ -9,7 +9,7 @@ function DeleteBoard({ id, onBoardCreated }) {
             });
             if (response.ok) {
                 console.log("Board deleted successfully");
-                onBoardCreated(); // Call this if you need to trigger any update after deletion
+                onBoardCreated();
             } else {
                 throw new Error('Failed to delete the board');
             }
