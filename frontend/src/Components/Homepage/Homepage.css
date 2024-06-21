@@ -1,10 +1,9 @@
 .main-content {
     padding: 30px;
     text-align: center;
-    min-height: 700px;
+    min-height: 800px;
 }
 
-/* Search and Search button specific styles */
 .search {
     margin: 20px auto;
     display: flex;
@@ -25,8 +24,6 @@
     color: #24292e;
     padding: 6px 16px;
 }
-
-/* Category Buttons */
 
 .category-button {
     height: auto;
@@ -62,6 +59,7 @@
     font-size: 14px;
     background-color: #fafbfc;
     border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 8px;
     box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
     rgba(255, 255, 255, 0.25) 0 1px 0 inset;
     color: #24292e;

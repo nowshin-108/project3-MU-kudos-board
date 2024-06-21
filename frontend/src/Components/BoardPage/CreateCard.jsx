@@ -1,13 +1,37 @@
 import { useState } from "react";
 import PropTypes from 'prop-types';
-import "./CreateBoard.css";
+import "./CreateCard.css";
 
-function CreateBoard({onBoardCreated}) {
+function CreateCard({id, onCardCreated}) {
     const [title, setTitle] = useState('');
-    const [category, setCategory] = useState('Celebration');
+    const [message, setMessage] = useState('');
     const [author, setauthor] = useState('');
-    const [description, setDescription] = useState('')
+    const [imgURL, setImgURL] = useState('');
+    const [searchGif, setSearchGif] = useState('');
+    const apiKey = import.meta.env.VITE_APP_API_KEY
+
     const [modal, setModal] = useState(false);
+
+    const handleSearch = async (event) => {
+        const newSearchQuery = event.target.value;
+        setSearchGif(newSearchQuery);
+        if (!newSearchQuery.trim()) return;
+        const params = new URLSearchParams({
+            api_key: apiKey,
+            q: newSearchQuery,
+            limit: 10  
+        });
+        try {
+            const response = await fetch(`https://api.giphy.com/v1/gifs/search?${params.toString()}`);
+            const data = await response.json();
+            if (data.data.length > 0) {
+                setImgURL(data.data[0].images.original.url); 
+            }
+        } catch (error) {
+            console.error("Error searching for GIFs:", error);
+        }
+    };
+
     const toggleModal = () => {
         setModal(!modal);
     };
@@ -26,21 +50,22 @@ function CreateBoard({onBoardCreated}) {
             },
             body: JSON.stringify({
                 title,
-                category,
+                message,
                 author,
-                description
+                imgURL
             })
         };
-        event.preventDefault(); 
+        event.preventDefault();
         try {
-            const response = await fetch(`http://localhost:3000/boards`, options);
+            const response = await fetch(`http://localhost:3000/boards/${id}/cards`, options);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
-            onBoardCreated()
-            console.log("Board created successfully:", data);
-            return data; 
+            onCardCreated();
+            console.log("Card created successfully:", data);
+            toggleModal();
+            return data;
         } catch (error) {
             console.error("Error creating board:", error);
         }
@@ -49,7 +74,7 @@ function CreateBoard({onBoardCreated}) {
     return (
         <>
                 <button onClick={toggleModal} className="create-brd-btn">
-                    Create a New Board
+                    Add Card
                 </button>
             {modal && (
                 <div className="overlay" onClick={toggleModal}>
@@ -67,22 +92,18 @@ function CreateBoard({onBoardCreated}) {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="category">Category:</label>
-                                    <select                                         
+                                    <label htmlFor="message">Message:</label>
+                                    <input                                        
                                         type="text"
-                                        id="category"
-                                        value={category}
-                                        onChange={(e) => setCategory(e.target.value)}
+                                        id="message"
+                                        value={message}
+                                        onChange={(e) => setMessage(e.target.value)}
                                         required
                                     
-                                    >   
-                                        <option value="Celebration">Celebration</option>
-                                        <option value="Inspiration">Inspiration</option>
-                                        <option value="Thank You">Thank You</option>
-                                    </select>
+                                    /> 
                                 </div>
                                 <div>
-                                    <label htmlFor="author">Author:</label>
+                                    <label htmlFor="author">Sign as author:</label>
                                     <input
                                         type="text"
                                         id="author"
@@ -92,14 +113,14 @@ function CreateBoard({onBoardCreated}) {
                                     />
                                 </div>
                                 <div>
-                                    <label htmlFor="description">Description:</label>
+                                    <label htmlFor="imgURL">Gif:</label>
                                     <input
                                         type="text"
-                                        id="description"
-                                        value={description}
-                                        onChange={(e) => setDescription(e.target.value)}
-                                        required
+                                        placeholder="Search Gifs..."
+                                        value={searchGif}
+                                        onChange={handleSearch}
                                     />
+                                    {imgURL ? <img src={imgURL} alt="gif" /> : null}
                                 </div>
                                 <button type="submit">Create Board</button>
                             </form>
@@ -111,10 +132,11 @@ function CreateBoard({onBoardCreated}) {
     );
 }
 
-CreateBoard.propTypes = {
-    onBoardCreated: PropTypes.func.isRequired,
+CreateCard.propTypes = {
+    id: PropTypes.string.isRequired,
+    onCardCreated: PropTypes.func.isRequired,
 }
 
-export default CreateBoard
+export default CreateCard
 
 //after creating the board there the modal has to close.

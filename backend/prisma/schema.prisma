@@ -17,7 +17,8 @@ model board {
   board_id      Int         @id @default(autoincrement())
   title         String
   category      String
-  owner         String
+  author         String
+  description   String
   create_time   DateTime    @default(now())
   update_time   DateTime    @updatedAt
   cards         card[]
@@ -29,7 +30,7 @@ model card {
   card_id       Int       @id @default(autoincrement())
   title         String
   message       String
-  owner         String
+  author        String
   imgURL        String
   votes         Int       @default(0)
   create_time   DateTime  @default(now())

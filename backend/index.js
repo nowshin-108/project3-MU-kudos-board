@@ -36,9 +36,11 @@ app.get('/boards', async (req, res) => {
     }
 });
 
-// app.get('/boards/search', async(req,res)=>{
+// app.get('/boards/search/:search', async(req,res)=>{
 //     try{
-//         const searchQuery = req.query;
+        
+//         const searchQuery = req.params.search;
+//         console.log(searchQuery);
 //         const boards = await prisma.board.findMany({
 //             where:{
 //                 title:{
@@ -48,8 +50,8 @@ app.get('/boards', async (req, res) => {
 //         })
 //         res.status(200).json({boards})
 //     }
-//     catch{
-
+//     catch (error){
+//         console.log(error);
 //     }
 // })
 
@@ -91,13 +93,14 @@ app.get('/boards/:board_id', async (req, res) => {
 
 // Board-Route: Posting a new board
 app.post('/boards', async (req, res) => {
-    const { title, category, owner } = req.body;
+    const { title, category, author, description } = req.body;
     try {
         const board = await prisma.board.create({
         data: {
             title,
             category,
-            owner,
+            author,
+            description
         },
         });
         res.status(201).json(board);
@@ -140,14 +143,14 @@ app.get('/boards/:board_id/cards', async (req, res) => {
 // Card-Route: posting a card to a specific board
 app.post('/boards/:board_id/cards', async (req, res) => {
     const { board_id } = req.params;
-    const { title, message, imgURL, owner } = req.body;
+    const { title, message, imgURL, author } = req.body;
     try {
         const card = await prisma.card.create({
         data: {
             title,
             message,
             imgURL,
-            owner,
+            author,
             board_id: parseInt(board_id)},
         });
         res.status(201).json(card);
@@ -192,20 +195,22 @@ app.get('/boards/:board_id/cards/:card_id/votes', async (req, res) => {
 // PATCH votes for a card: update card vote
 app.patch('/boards/:board_id/cards/:card_id/votes', async (req, res) => {
     const { board_id, card_id } = req.params;
-    const { votes } = req.body;
-
     try {
-        const updatedCard = await prisma.card.update({
-        where: { card_id: parseInt(card_id), board_id: parseInt(board_id) },
-        data: { votes: parseInt(votes) },
+        const updatedVote = await prisma.card.update({
+            where: {
+                board_id:parseInt(board_id),
+                card_id: parseInt(card_id),
+            },
+            data: {
+                votes: {
+                    increment: 1  // Assuming you're incrementing a vote count
+                }
+            }
         });
-        if (!updatedCard) {
-        return res.status(404).json({ message: 'Card not found' });
-        }
-        res.status(200).json({ votes: updatedCard.votes });
+        res.json(updatedVote);
     } catch (error) {
-        console.error('Error updating votes for card:', error);
-        res.status(500).json({ message: 'Internal server error' });
+        console.error("Failed to update votes:", error);
+        res.status(500).send("Failed to update votes");
     }
 });
 

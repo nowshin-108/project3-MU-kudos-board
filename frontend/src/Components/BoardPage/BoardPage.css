@@ -1,0 +1,55 @@
+.main-content {
+    padding: 30px;
+    text-align: center;
+    min-height: 450px;
+}
+
+
+.card-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.card-preview {
+    border-radius: 8px;
+    box-sizing: border-box;
+    padding: 10px;
+    text-wrap: pretty;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    cursor: pointer;
+}
+
+.card-button {
+    height: auto;
+    margin: 10px;
+    font-size: 14px;
+    background-color: #fafbfc;
+    border: 1px solid rgba(27, 31, 35, 0.15);
+    border-radius: 8px;
+    box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0,
+    rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+    color: #24292e;
+    padding: 6px 16px;
+}
+
+.card-button:hover {
+    transform: scale(1.05);
+    background: #fff6f6;
+}
+
+.upvote {
+    cursor: pointer;
+}
+
+.upvote:hover{
+    color: orange;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+
+}

@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Homepage.css'
 import CreateBoard from '../HandleBoard/CreateBoard';
 import DeleteBoard from '../HandleBoard/DeleteBoard';
 
 function Homepage() {
+    const navigate = useNavigate();
     const [boards, setBoards] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [searchQuery, setSearchQuery] = useState("");
@@ -38,7 +40,6 @@ function Homepage() {
         const newSearchQuery = event.target.value;
         setSearchQuery(newSearchQuery);
         if (newSearchQuery.trim() === "") {
-            // If the search query is empty, fetch all boards again
             fetchBoards(selectedCategory);
             return;
         }
@@ -62,6 +63,10 @@ function Homepage() {
     useEffect(() => {
         fetchBoards(selectedCategory);
     }, [selectedCategory]);
+
+    const goToBoard = (id) => {
+        navigate(`/boards/${id}/cards`);
+    };
 
     return (
             <div className='main-content'>
@@ -88,8 +93,9 @@ function Homepage() {
                         alt={board.board_id}
                         />
                         <h3>{board.title}</h3>
-                        <p>{board.category}</p>
-                        <button className="board-card-button">View</button>
+                        <p>Category: {board.category}</p>
+                        <p>Author: {board.author}</p>
+                        <button className="board-card-button" onClick={() => goToBoard(board.board_id)}>View</button>
                         <DeleteBoard id={board.board_id} onBoardCreated={handleBoardCreated}/>
                     </div>
                 ))}
