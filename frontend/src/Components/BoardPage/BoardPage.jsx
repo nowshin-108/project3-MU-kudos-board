@@ -21,10 +21,28 @@ function BoardPage() {
                 }
             });
             const data = await response.json();
-            setCards(data.cards);
+
+            const sortedCards = data.cards.sort((a, b) => a.card_id - b.card_id);
+            setCards(sortedCards);
+
+            // setCards(data.cards)
+
+
+
+
+
         } catch (error) {
             console.log("Error fetching cards", error);
         }
+    };
+
+    const incrementCardVotes = (cardId) => {
+        setCards(prevCards => prevCards.map(card => {
+            if (card.card_id === cardId) {
+                return { ...card, votes: card.votes + 1 };
+            }
+            return card;
+        }));
     };
 
     const reloadCardList = () => {
@@ -48,7 +66,7 @@ function BoardPage() {
                         <h3>{card.title}</h3>
                         {card.author ? <p>Author Sign : {card.author}</p> : <p>Author sign : Anonymous</p>}
                         <p>{card.message}</p>
-                        <Upvote boardId={board_id} cardId={card.card_id} onCardCreated={reloadCardList} vote_count={card.votes}/>
+                        <Upvote boardId={board_id} cardId={card.card_id} onUpvoted={incrementCardVotes} vote_count={card.votes}/>
                         <DeleteCard boardId={board_id} cardId={card.card_id} onCardCreated={reloadCardList}/>
                         <LoadComment boardId={board_id} cardId={card.card_id}/>
 

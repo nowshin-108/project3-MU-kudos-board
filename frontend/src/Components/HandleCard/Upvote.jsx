@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
+import { useState} from "react";
 import "./Upvote.css";
 import { BiUpvote } from "react-icons/bi";
 
-function Upvote({ boardId, cardId, onCardCreated, vote_count }) {
+function Upvote({ boardId, cardId, onUpvoted, vote_count }) {
+    const [votes, setVotes] = useState(vote_count || 0);
     const updateVote = async () => {
         try {
             const response = await fetch(`http://localhost:3000/boards/${boardId}/cards/${cardId}/votes`, {
@@ -11,15 +13,16 @@ function Upvote({ boardId, cardId, onCardCreated, vote_count }) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    vote: true
+                    votes: votes + 1,
                 })
             });
             if (response.ok) {
                 console.log("Upvoted successfully");
-                onCardCreated();
+                onUpvoted(cardId);
             } else {
                 throw new Error('Failed to upvote');
             }
+            setVotes(votes+1)
         } catch (error) {
             console.error("Error upvoting:", error);
         }
@@ -33,7 +36,7 @@ function Upvote({ boardId, cardId, onCardCreated, vote_count }) {
 }
 
 Upvote.propTypes = {
-    onCardCreated: PropTypes.func.isRequired,
+    onUpvoted: PropTypes.func.isRequired,
     boardId: PropTypes.string.isRequired,
     cardId: PropTypes.number.isRequired,
     vote_count: PropTypes.number.isRequired

@@ -160,9 +160,33 @@ app.get('/boards/:board_id/cards/:card_id/votes', async (req, res) => {
     }
 });
 
+// // PATCH votes for a card: update card vote
+// app.patch('/boards/:board_id/cards/:card_id/votes', async (req, res) => {
+//     const { board_id, card_id } = req.params;
+//     try {
+//         const updatedVote = await prisma.card.update({
+//             where: {
+//                 board_id:parseInt(board_id),
+//                 card_id: parseInt(card_id),
+//             },
+//             data: {
+//                 votes: {
+//                     increment: 1  // Assuming you're incrementing a vote count
+//                 }
+//             }
+//         });
+//         res.json(updatedVote);
+//     } catch (error) {
+//         console.error("Failed to update votes:", error);
+//         res.status(500).send("Failed to update votes");
+//     }
+// });
+
+
 // PATCH votes for a card: update card vote
 app.patch('/boards/:board_id/cards/:card_id/votes', async (req, res) => {
     const { board_id, card_id } = req.params;
+    const { votes } = req.body;
     try {
         const updatedVote = await prisma.card.update({
             where: {
@@ -170,9 +194,7 @@ app.patch('/boards/:board_id/cards/:card_id/votes', async (req, res) => {
                 card_id: parseInt(card_id),
             },
             data: {
-                votes: {
-                    increment: 1  // Assuming you're incrementing a vote count
-                }
+                votes: parseInt(votes) 
             }
         });
         res.json(updatedVote);

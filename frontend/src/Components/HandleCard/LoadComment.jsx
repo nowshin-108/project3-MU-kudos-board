@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PropTypes from 'prop-types';
 import "./LoadComment.css";
 import PostComment from "./PostComment";
@@ -42,9 +42,6 @@ function LoadComment({ boardId, cardId }) {
         fetchComments();
     };
 
-    useEffect(() => {
-        fetchComments();
-    }, []);
 
     return (
         <>
