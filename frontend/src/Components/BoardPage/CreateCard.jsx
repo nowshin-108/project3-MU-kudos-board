@@ -103,13 +103,12 @@ function CreateCard({id, onCardCreated}) {
                                     /> 
                                 </div>
                                 <div>
-                                    <label htmlFor="author">Sign as author:</label>
+                                    <label htmlFor="author">Sign as author (optional):</label>
                                     <input
                                         type="text"
                                         id="author"
                                         value={author}
                                         onChange={(e) => setauthor(e.target.value)}
-                                        required
                                     />
                                 </div>
                                 <div>

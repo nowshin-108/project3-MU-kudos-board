@@ -94,7 +94,7 @@ function Homepage() {
                         />
                         <h3>{board.title}</h3>
                         <p>Category: {board.category}</p>
-                        <p>Author: {board.author}</p>
+                        {board.author ? <p>Author: {board.author}</p> : <p>Author: Anonymous</p>}
                         <button className="board-card-button" onClick={() => goToBoard(board.board_id)}>View</button>
                         <DeleteBoard id={board.board_id} onBoardCreated={handleBoardCreated}/>
                     </div>

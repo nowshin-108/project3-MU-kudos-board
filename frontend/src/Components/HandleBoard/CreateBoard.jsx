@@ -40,6 +40,7 @@ function CreateBoard({onBoardCreated}) {
             const data = await response.json();
             onBoardCreated()
             console.log("Board created successfully:", data);
+            toggleModal();
             return data; 
         } catch (error) {
             console.error("Error creating board:", error);
@@ -82,13 +83,12 @@ function CreateBoard({onBoardCreated}) {
                                     </select>
                                 </div>
                                 <div>
-                                    <label htmlFor="author">Author:</label>
+                                    <label htmlFor="author">Author (optional):</label>
                                     <input
                                         type="text"
                                         id="author"
                                         value={author}
                                         onChange={(e) => setauthor(e.target.value)}
-                                        required
                                     />
                                 </div>
                                 <div>

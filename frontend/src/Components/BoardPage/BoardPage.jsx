@@ -50,7 +50,8 @@ function BoardPage() {
                         alt={card.card_id}
                         />
                         <h3>{card.title}</h3>
-                        <p>Author Sign: {card.author}</p>
+                        {card.author ? <p>Author Sign : {card.author}</p> : <p>Author sign : Anonymous</p>}
+                        {/* <p>Author Sign: {card.author}</p> */}
                         <p>{card.message}</p>
                         <Upvote boardId={board_id} cardId={card.card_id} onCardCreated={reloadCardList} vote_count={card.votes}/>
                         <DeleteCard boardId={board_id} cardId={card.card_id} onCardCreated={reloadCardList}/>
