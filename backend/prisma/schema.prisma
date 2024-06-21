@@ -25,14 +25,25 @@ model board {
 }
 
 model card {
-  board         board     @relation(fields: [board_id], references: [board_id], onDelete: Cascade)
-  board_id      Int
-  card_id       Int       @id @default(autoincrement())
-  title         String
-  message       String
-  author        String
-  imgURL        String
-  votes         Int       @default(0)
-  create_time   DateTime  @default(now())
-  update_time   DateTime  @updatedAt
+  board board @relation(fields: [board_id], references: [board_id], onDelete: Cascade)
+  board_id Int
+  card_id Int @id @default(autoincrement())
+  title String
+  message String
+  author String
+  imgURL String
+  votes Int @default(0)
+  create_time DateTime @default(now())
+  update_time DateTime @updatedAt
+  comments comment[]
+}
+
+model comment {
+  comment_id Int @id @default(autoincrement())
+  card_id Int
+  card card @relation(fields: [card_id], references: [card_id], onDelete: Cascade)
+  author String
+  content String
+  create_time DateTime @default(now())
+  likes Int @default(0)
 }

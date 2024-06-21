@@ -73,9 +73,9 @@ function CreateCard({id, onCardCreated}) {
 
     return (
         <>
-                <button onClick={toggleModal} className="create-brd-btn">
-                    Add Card
-                </button>
+            <button onClick={toggleModal} className="create-brd-btn">
+                Add Card
+            </button>
             {modal && (
                 <div className="overlay" onClick={toggleModal}>
                     <div className="modal_content" onClick={e => e.stopPropagation()} >

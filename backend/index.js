@@ -36,38 +36,6 @@ app.get('/boards', async (req, res) => {
     }
 });
 
-// app.get('/boards/search/:search', async(req,res)=>{
-//     try{
-        
-//         const searchQuery = req.params.search;
-//         console.log(searchQuery);
-//         const boards = await prisma.board.findMany({
-//             where:{
-//                 title:{
-//                     startsWith: searchQuery, mode: 'insensitive'
-//                 },
-//             },
-//         })
-//         res.status(200).json({boards})
-//     }
-//     catch (error){
-//         console.log(error);
-//     }
-// })
-
-// app.get('/boards', async (req, res) => {
-//     const { category } = req.query
-//     try {
-//         const boards = await prisma.board.findMany({
-//             where: {category: category}
-//         });
-//         res.status(200).json({ boards });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ error: 'Server Error' });
-//     }
-// });
-
 // Board-Route: Getting a specific board
 app.get('/boards/:board_id', async (req, res) => {
     const { board_id } = req.params;
@@ -211,6 +179,123 @@ app.patch('/boards/:board_id/cards/:card_id/votes', async (req, res) => {
     } catch (error) {
         console.error("Failed to update votes:", error);
         res.status(500).send("Failed to update votes");
+    }
+});
+
+
+// GET all comments for a card
+app.get('/boards/:board_id/cards/:card_id/comments', async (req, res) => {
+    const { board_id, card_id } = req.params;
+
+    try {
+        // Parse the card_id and board_id to ensure they are integers
+        const parsedCardId = parseInt(card_id);
+        const parsedBoardId = parseInt(board_id);
+
+        // Check if the parsing was successful
+        if (isNaN(parsedCardId) || isNaN(parsedBoardId)) {
+            return res.status(400).json({ message: "Invalid board or card ID" });
+        }
+
+        // Fetch comments using Prisma, ensuring the card belongs to the specified board
+        const comments = await prisma.comment.findMany({
+            where: {
+                card: {
+                    card_id: parsedCardId,
+                    board_id: parsedBoardId
+                }
+            },
+            include: {
+                card: true // Optionally include card details
+            }
+        });
+
+        // Check if comments exist
+        if (comments.length === 0) {
+            return res.status(404).json({ message: 'No comments found for this card' });
+        }
+
+        // Return the comments
+        res.status(200).json(comments);
+    } catch (error) {
+        console.error("Failed to get comments:", error);
+        res.status(500).json({ message: "Failed to get comments due to internal server error" });
+    }
+});
+
+
+// POST a new comment
+app.post('/boards/:board_id/cards/:card_id/comments', async (req, res) => {
+    const { card_id } = req.params;
+    const { author, content } = req.body;
+
+    // Validate input data
+    if (!author || !content) {
+        return res.status(400).json({ message: "Author and content are required" });
+    }
+
+    try {
+        // Parse card_id and validate it
+        const parsedCardId = parseInt(card_id);
+        if (isNaN(parsedCardId)) {
+            return res.status(400).json({ message: "Invalid card ID" });
+        }
+
+        // Check if the card exists
+        const card = await prisma.card.findUnique({
+            where: { card_id: parsedCardId }
+        });
+        if (!card) {
+            return res.status(404).json({ message: "Card not found" });
+        }
+
+        // Create a new comment
+        const comment = await prisma.comment.create({
+            data: {
+                card_id: parsedCardId,
+                author,
+                content
+            }
+        });
+
+        // Return the newly created comment
+        res.status(201).json(comment);
+    } catch (error) {
+        console.error("Failed to create comment:", error);
+        res.status(500).json({ message: "Failed to create comment due to internal server error" });
+    }
+});
+
+
+
+
+app.patch('/boards/:board_id/cards/:card_id/comments/:comment_id/like', async (req, res) => {
+    const { comment_id } = req.params;
+
+    // Validate comment_id
+    const parsedCommentId = parseInt(comment_id);
+    if (isNaN(parsedCommentId)) {
+        return res.status(400).json({ message: "Invalid comment ID" });
+    }
+
+    try {
+        // Check if the comment exists
+        const existingComment = await prisma.comment.findUnique({
+            where: { comment_id: parsedCommentId },
+        });
+        if (!existingComment) {
+            return res.status(404).json({ message: "Comment not found" });
+        }
+
+        // Update the comment to increment likes
+        const updatedComment = await prisma.comment.update({
+            where: { comment_id: parsedCommentId },
+            data: { likes: { increment: 1 } }
+        });
+        res.json(updatedComment);
+    } catch (error) {
+        console.error("Failed to like comment:", error);
+        res.status(500).json({ message: "Failed to like comment due to internal server error" });
     }
 });
 

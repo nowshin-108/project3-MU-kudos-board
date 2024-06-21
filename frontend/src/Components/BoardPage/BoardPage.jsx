@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './BoardPage.css'
-import CreateCard from './CreateCard';
-import DeleteCard from './DeleteCard';
-import Upvote from './Upvote';
+import CreateCard from '../HandleCard/CreateCard';
+import DeleteCard from '../HandleCard/DeleteCard';
+import Upvote from '../HandleCard/Upvote';
+import LoadComment from '../HandleCard/LoadComment';
 
 function BoardPage() {
     const { board_id } = useParams();
@@ -26,11 +27,6 @@ function BoardPage() {
         }
     };
 
-
-    // const handleCategoryChange = (category) => {
-    //     setSelectedCategory(category);
-    // };
-
     const reloadCardList = () => {
         fetchCards();
     };
@@ -51,10 +47,11 @@ function BoardPage() {
                         />
                         <h3>{card.title}</h3>
                         {card.author ? <p>Author Sign : {card.author}</p> : <p>Author sign : Anonymous</p>}
-                        {/* <p>Author Sign: {card.author}</p> */}
                         <p>{card.message}</p>
                         <Upvote boardId={board_id} cardId={card.card_id} onCardCreated={reloadCardList} vote_count={card.votes}/>
                         <DeleteCard boardId={board_id} cardId={card.card_id} onCardCreated={reloadCardList}/>
+                        <LoadComment boardId={board_id} cardId={card.card_id}/>
+
                     </div>
                 ))}
             </div>

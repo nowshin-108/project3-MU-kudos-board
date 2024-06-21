@@ -49,9 +49,9 @@ function CreateBoard({onBoardCreated}) {
 
     return (
         <>
-                <button onClick={toggleModal} className="create-brd-btn">
-                    Create a New Board
-                </button>
+            <button onClick={toggleModal} className="create-brd-btn">
+                Create a New Board
+            </button>
             {modal && (
                 <div className="overlay" onClick={toggleModal}>
                     <div className="modal_content" onClick={e => e.stopPropagation()} >
@@ -116,5 +116,3 @@ CreateBoard.propTypes = {
 }
 
 export default CreateBoard
-
-//after creating the board there the modal has to close.
