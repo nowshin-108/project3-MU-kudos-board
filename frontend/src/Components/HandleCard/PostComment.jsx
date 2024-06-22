@@ -19,7 +19,7 @@ function PostComment({ boardId, cardId, onCommentCreated }) {
         };
         event.preventDefault(); 
         try {
-            const response = await fetch(`http://localhost:3000/boards/${boardId}/cards/${cardId}/comments`, options);
+            const response = await fetch(`https://project3-mu-kudos-board-5.onrender.com/boards/${boardId}/cards/${cardId}/comments`, options);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

@@ -57,7 +57,7 @@ function CreateCard({id, onCardCreated}) {
         };
         event.preventDefault();
         try {
-            const response = await fetch(`http://localhost:3000/boards/${id}/cards`, options);
+            const response = await fetch(`https://project3-mu-kudos-board-5.onrender.com/boards/${id}/cards`, options);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }

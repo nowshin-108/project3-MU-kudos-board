@@ -20,7 +20,7 @@ function LoadComment({ boardId, cardId }) {
 
     const fetchComments = async () => {
         try {
-            const url = `http://localhost:3000/boards/${boardId}/cards/${cardId}/comments`;
+            const url = `https://project3-mu-kudos-board-5.onrender.com/boards/${boardId}/cards/${cardId}/comments`;
             const response = await fetch(url, {
                 method: 'GET',
                 headers: {

@@ -5,10 +5,10 @@
 }
 .upvote-icon {
     cursor: pointer;
-    font-size: large;
+    font-size: larger;
 }
 
 .upvote-icon:hover{
-    color: orange;
+    color: orangered;
     transform: scale(1.05);
 }

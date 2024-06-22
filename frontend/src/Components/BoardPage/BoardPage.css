@@ -15,12 +15,19 @@
 }
 
 .card-preview {
+    background: #ffb3ba;
     border-radius: 8px;
     box-sizing: border-box;
     padding: 10px;
     text-wrap: pretty;
     border: 1px solid rgba(27, 31, 35, 0.15);
     cursor: pointer;
+}
+
+.card-preview img {
+    box-sizing: border-box;
+    width: 300px;
+    height: 300px;
 }
 
 .card-button {
@@ -40,6 +47,11 @@
     transform: scale(1.05);
     background: #fff6f6;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+.author-sign {
+    font-family: 'Pacifico', cursive;
+} 
 
 @media (max-width: 768px) {
 

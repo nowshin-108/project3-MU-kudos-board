@@ -4,7 +4,7 @@ import "./DeleteBoard.css";
 function DeleteBoard({ id, onBoardCreated }) {
     const handleDelete = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/boards/${id}`, {
+            const response = await fetch(`https://project3-mu-kudos-board-5.onrender.com/boards/${id}`, {
                 method: 'DELETE'
             });
             if (response.ok) {

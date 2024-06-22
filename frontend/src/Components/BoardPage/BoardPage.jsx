@@ -12,7 +12,7 @@ function BoardPage() {
 
     const fetchCards = async () => {
         try {
-            const url = `http://localhost:3000/boards/${board_id}/cards`;
+            const url = `https://project3-mu-kudos-board-5.onrender.com/boards/${board_id}/cards`;
             const response = await fetch(url, {
                 method: 'GET',
                 headers: {
@@ -54,9 +54,9 @@ function BoardPage() {
                         src={card.imgURL}
                         alt={card.card_id}
                         />
-                        <h3>{card.title}</h3>
-                        {card.author ? <p>Author Sign : {card.author}</p> : <p>Author sign : Anonymous</p>}
-                        <p>{card.message}</p>
+                        <h2>{card.title}</h2>
+                        {card.author ? <h4 className='author-sign'>{card.author}</h4> : <h4>Anonymous</h4>}
+                        <h4>Message: {card.message}</h4>
                         <Upvote boardId={board_id} cardId={card.card_id} onUpvoted={incrementCardVotes} vote_count={card.votes}/>
                         <DeleteCard boardId={board_id} cardId={card.card_id} onCardCreated={reloadCardList}/>
                         <LoadComment boardId={board_id} cardId={card.card_id}/>

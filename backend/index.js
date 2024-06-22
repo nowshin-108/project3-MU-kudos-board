@@ -27,7 +27,6 @@ app.get('/boards', async (req, res) => {
                 },
             };
         }
-
         const boards = await prisma.board.findMany(queryOptions);
         res.status(200).json({ boards });
     } catch (error) {
@@ -221,5 +220,5 @@ app.post('/boards/:board_id/cards/:card_id/comments', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 const server = app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`)
+    console.log(`Server is running on https://project3-mu-kudos-board-5.onrender.com`)
 })

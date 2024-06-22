@@ -12,7 +12,7 @@ function Homepage() {
 
     const fetchBoards = async (category = 'all') => {
         try {
-            const url = (category === 'All') ? `http://localhost:3000/boards` : `http://localhost:3000/boards?category=${category}`;
+            const url = (category === 'All') ? `https://project3-mu-kudos-board-5.onrender.com/boards` : `https://project3-mu-kudos-board-5.onrender.com/boards?category=${category}`;
             const response = await fetch(url, {
                 method: 'GET',
                 headers: {
@@ -44,7 +44,7 @@ function Homepage() {
         }
         setBoards([]);
         try {
-            const url = `http://localhost:3000/boards?searchQuery=${searchQuery}`;
+            const url = `https://project3-mu-kudos-board-5.onrender.com/boards?searchQuery=${searchQuery}`;
             const response = await fetch(url, {
                 method: 'GET',
                 headers: {
@@ -87,12 +87,13 @@ function Homepage() {
                 {boards.map((board) => (
                     <div key={board.board_id} className="board-preview">
                         <img
-                        src={`https://picsum.photos/200/300?random=${board.board_id}`}
+                        src={`https://picsum.photos/300/300?random=${board.board_id}`}
                         alt={board.board_id}
                         />
-                        <h3>{board.title}</h3>
-                        <p>Category: {board.category}</p>
-                        {board.author ? <p>Author: {board.author}</p> : <p>Author: Anonymous</p>}
+                        <h2>{board.title}</h2>
+                        <h5>Category: {board.category}</h5>
+                        {board.author ? <h5>By: {board.author}</h5> : <h5>Anonymous</h5>}
+                        <h5>{board.description}</h5>
                         <button className="board-card-button" onClick={() => goToBoard(board.board_id)}>View</button>
                         <DeleteBoard id={board.board_id} onBoardCreated={handleBoardCreated}/>
                     </div>

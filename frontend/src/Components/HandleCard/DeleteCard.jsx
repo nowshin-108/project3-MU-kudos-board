@@ -4,7 +4,7 @@ import "./DeleteCard.css";
 function DeleteCard({ boardId, cardId, onCardCreated }) {
     const handleDelete = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/boards/${boardId}/cards/${cardId}`, {
+            const response = await fetch(`https://project3-mu-kudos-board-5.onrender.com/boards/${boardId}/cards/${cardId}`, {
                 method: 'DELETE'
             });
             if (response.ok) {

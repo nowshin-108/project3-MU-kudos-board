@@ -7,7 +7,7 @@ function Upvote({ boardId, cardId, onUpvoted, vote_count }) {
     const [votes, setVotes] = useState(vote_count || 0);
     const updateVote = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/boards/${boardId}/cards/${cardId}/votes`, {
+            const response = await fetch(`https://project3-mu-kudos-board-5.onrender.com/boards/${boardId}/cards/${cardId}/votes`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json'
@@ -28,7 +28,7 @@ function Upvote({ boardId, cardId, onUpvoted, vote_count }) {
     };
     return (
         <div className='upvote-container'>
-            <p className='upvote-number'>{vote_count}&nbsp;&nbsp;</p> 
+            <h4 className='upvote-number'>{vote_count}&nbsp;&nbsp;</h4> 
             <p className='upvote-icon'><BiUpvote onClick={updateVote} /></p>
         </div>
     );
