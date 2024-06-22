@@ -5,7 +5,7 @@ Meta University Project 3
 
 Submitted by: **Nowshin Anber**
 
-Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
+Deployed Application (optional): [Kudos Board Deployed Site](https://project3-mu-kudos-board-6.onrender.com/)
 
 ### Application Features
 
@@ -43,28 +43,26 @@ Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
 ### Walkthrough Video
 
-`TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video or gif actually renders and animates when viewing this README. (🚫 Remove this paragraph after adding walkthrough video)
-
-`ADD_EMBEDDED_CODE_HERE`
+https://www.loom.com/share/559564ca87514f3591e70ce74d48041b?sid=828b1527-6bb7-4201-ac10-5ba3bb9112e0
 
 ### Reflection
 
 * Did the topics discussed in your labs prepare you to complete the assignment? Be specific, which features in your weekly assignment did you feel unprepared to complete?
 
-Add your response here
+Yeah, the labs did prepare me. I felt unprepared while doing the user authentication stretech feature as they didn't teach it in class. But glad that it was dropped.
 
 * If you had more time, what would you have done differently? Would you have added additional features? Changed the way your project responded to a particular event, etc.
   
-Add your response here
+Add more css, add downvote button on the cards and also like button for the comments
 
 * Reflect on your project demo, what went well? Were there things that maybe didn't go as planned? Did you notice something that your peer did that you would like to try next time?
 
-Add your response here
+Didn't present yet.
 
 ### Open-source libraries used
 
-- Add any links to open-source libraries used in your project.
+- react-icon ig?
 
 ### Shout out
 
-Give a shout out to somebody from your cohort that especially helped you during your project. This can be a fellow peer, instructor, TA, mentor, etc.
+Paige's lecture videos, Sammy's brain touching explanations, Bryan & Gabriella for help with deployment. And big shoutout to me. (It was a long week I deserve a shoutout)
