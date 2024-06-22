@@ -8,7 +8,6 @@ function DeleteBoard({ id, onBoardCreated }) {
                 method: 'DELETE'
             });
             if (response.ok) {
-                console.log("Board deleted successfully");
                 onBoardCreated();
             } else {
                 throw new Error('Failed to delete the board');

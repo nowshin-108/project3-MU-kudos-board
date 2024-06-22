@@ -1,10 +1,9 @@
 # project3-MU-kudos-board
 Meta University Project 3
-📝 `NOTE` Use this template to initialize the contents of a README.md file for your application. As you work on your assignment over the course of the week, update the required or stretch features lists to indicate which features you have completed by changing `[ ]` to `[x]`. (🚫 Remove this paragraph before submitting your assignment.)
 
 ## Unit Assignment: Kudos Board
 
-Submitted by: **NAME**
+Submitted by: **Nowshin Anber**
 
 Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
@@ -36,18 +35,10 @@ Deployed Application (optional): [Kudos Board Deployed Site](ADD_LINK_HERE)
 
 #### STRETCH FEATURES
 
-
-- [ ] **User Accounts**
-  - [ ] Users should be able to log in with a username and password.
-  - [ ] Users should be able to sign up for a new account.
-  - [ ]  Boards and cards should be associated with a user.
-    - [ ]  Anonymous cards or cards by guest users should still be allowed.
-  - [ ] Add a new filter option on the home page to display only the current user's boards.
-  - [ ] Allow boards to be deleted only if they are owned by the user.
-- [ ] **Deployment**
-  - [ ] Website is deployed via Render.
-- [ ] **Comments**
-  - [ ] Users should be able to comment on cards.
+- [x] **Deployment**
+  - [x] Website is deployed via Render.
+- [x] **Comments**
+  - [x] Users should be able to comment on cards.
 
 
 ### Walkthrough Video

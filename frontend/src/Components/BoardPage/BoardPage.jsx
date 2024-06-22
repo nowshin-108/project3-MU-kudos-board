@@ -13,7 +13,6 @@ function BoardPage() {
     const fetchCards = async () => {
         try {
             const url = `http://localhost:3000/boards/${board_id}/cards`;
-            console.log(`Fetching cards from board ${board_id}:`, url); 
             const response = await fetch(url, {
                 method: 'GET',
                 headers: {
@@ -21,18 +20,10 @@ function BoardPage() {
                 }
             });
             const data = await response.json();
-
             const sortedCards = data.cards.sort((a, b) => a.card_id - b.card_id);
             setCards(sortedCards);
-
-            // setCards(data.cards)
-
-
-
-
-
         } catch (error) {
-            console.log("Error fetching cards", error);
+            console.error("Error fetching cards", error);
         }
     };
 
@@ -69,7 +60,6 @@ function BoardPage() {
                         <Upvote boardId={board_id} cardId={card.card_id} onUpvoted={incrementCardVotes} vote_count={card.votes}/>
                         <DeleteCard boardId={board_id} cardId={card.card_id} onCardCreated={reloadCardList}/>
                         <LoadComment boardId={board_id} cardId={card.card_id}/>
-
                     </div>
                 ))}
             </div>

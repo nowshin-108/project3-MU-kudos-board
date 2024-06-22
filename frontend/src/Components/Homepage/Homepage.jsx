@@ -13,7 +13,6 @@ function Homepage() {
     const fetchBoards = async (category = 'all') => {
         try {
             const url = (category === 'All') ? `http://localhost:3000/boards` : `http://localhost:3000/boards?category=${category}`;
-            console.log("Fetching boards from URL:", url); 
             const response = await fetch(url, {
                 method: 'GET',
                 headers: {
@@ -23,7 +22,7 @@ function Homepage() {
             const data = await response.json();
             setBoards(data.boards);
         } catch (error) {
-            console.log("Error fetching boards", error);
+            console.error("Error fetching boards", error);
         }
     };
 
@@ -46,7 +45,6 @@ function Homepage() {
         setBoards([]);
         try {
             const url = `http://localhost:3000/boards?searchQuery=${searchQuery}`;
-            console.log("Fetching searched boards from URL:", url); 
             const response = await fetch(url, {
                 method: 'GET',
                 headers: {
@@ -56,7 +54,7 @@ function Homepage() {
             const data = await response.json();
             setBoards(data.boards);
         } catch (error) {
-            console.log("Error fetching boards", error);
+            console.error("Error fetching boards", error);
         }
     };
 

@@ -8,7 +8,6 @@ function DeleteCard({ boardId, cardId, onCardCreated }) {
                 method: 'DELETE'
             });
             if (response.ok) {
-                console.log("Card deleted successfully");
                 onCardCreated();
             } else {
                 throw new Error('Failed to delete the board');

@@ -24,8 +24,7 @@ function PostComment({ boardId, cardId, onCommentCreated }) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const data = await response.json();
-            onCommentCreated()
-            console.log("Comment created successfully:", data);
+            onCommentCreated();
             return data; 
         } catch (error) {
             console.error("Error creating comments:", error);

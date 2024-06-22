@@ -88,17 +88,3 @@
     text-align: center;
 }
 
-.modal_button_container{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-.close_modal:hover, .create_board {
-    cursor: pointer;
-}
-
-.create_close_container{
-    display: flex;
-    justify-content: space-evenly;
-    width: 25%;
-}

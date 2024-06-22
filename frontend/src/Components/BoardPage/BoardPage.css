@@ -41,15 +41,6 @@
     background: #fff6f6;
 }
 
-.upvote {
-    cursor: pointer;
-}
-
-.upvote:hover{
-    color: orange;
-    transform: scale(1.05);
-}
-
 @media (max-width: 768px) {
 
 }

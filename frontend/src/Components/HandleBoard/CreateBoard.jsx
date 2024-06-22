@@ -39,7 +39,6 @@ function CreateBoard({onBoardCreated}) {
             }
             const data = await response.json();
             onBoardCreated()
-            console.log("Board created successfully:", data);
             toggleModal();
             return data; 
         } catch (error) {

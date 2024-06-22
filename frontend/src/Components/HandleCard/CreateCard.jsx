@@ -63,7 +63,6 @@ function CreateCard({id, onCardCreated}) {
             }
             const data = await response.json();
             onCardCreated();
-            console.log("Card created successfully:", data);
             toggleModal();
             return data;
         } catch (error) {
@@ -137,5 +136,3 @@ CreateCard.propTypes = {
 }
 
 export default CreateCard
-
-//after creating the board there the modal has to close.

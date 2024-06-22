@@ -17,7 +17,6 @@ function Upvote({ boardId, cardId, onUpvoted, vote_count }) {
                 })
             });
             if (response.ok) {
-                console.log("Upvoted successfully");
                 onUpvoted(cardId);
             } else {
                 throw new Error('Failed to upvote');
@@ -29,8 +28,8 @@ function Upvote({ boardId, cardId, onUpvoted, vote_count }) {
     };
     return (
         <div className='upvote-container'>
-            <div className='upvote-number'>{vote_count}</div>
-            <div className='upvote-icon'><BiUpvote onClick={updateVote} /></div>
+            <p className='upvote-number'>{vote_count}&nbsp;&nbsp;</p> 
+            <p className='upvote-icon'><BiUpvote onClick={updateVote} /></p>
         </div>
     );
 }
