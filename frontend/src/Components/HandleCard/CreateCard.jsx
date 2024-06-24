@@ -120,7 +120,7 @@ function CreateCard({id, onCardCreated}) {
                                     />
                                     {imgURL ? <img src={imgURL} alt="gif" /> : null}
                                 </div>
-                                <button type="submit">Create Board</button>
+                                <button type="submit">Create Card</button>
                             </form>
                         </div>
                     </div>
